@@ -1,0 +1,51 @@
+[
+  {
+    "name": "Kopi",
+    "stock": 100,
+    "sellAmount": 10,
+    "transactionDate": "1-05-2021",
+    "type": "Konsumsi"
+  },
+  {
+    "name": "Teh",
+    "stock": 100,
+    "sellAmount": 19,
+    "transactionDate": "5-05-2021",
+    "type": "Konsumsi"
+  },
+  {
+    "name": "Kopi",
+    "stock": 90,
+    "sellAmount": 15,
+    "transactionDate": "10-05-2021",
+    "type": "Konsumsi"
+  },
+  {
+    "name": "Pasta Gigi",
+    "stock": 100,
+    "sellAmount": 20,
+    "transactionDate": "11-05-2021",
+    "type": "Pembersih"
+  },
+  {
+    "name": "Sabun Mandi",
+    "stock": 100,
+    "sellAmount": 30,
+    "transactionDate": "11-05-2021",
+    "type": "Pembersih"
+  },
+  {
+    "name": "Sampo",
+    "stock": 100,
+    "sellAmount": 25,
+    "transactionDate": "12-05-2021",
+    "type": "Konsumsi"
+  },
+  {
+    "name": "Teh",
+    "stock": 81,
+    "sellAmount": 5,
+    "transactionDate": "12-05-2021",
+    "type": "Konsumsi"
+  }
+]
