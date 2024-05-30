@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1717049752495" clover="3.2.0">
+  <project timestamp="1717049752496" name="All files">
+    <metrics statements="85" coveredstatements="68" conditionals="17" coveredconditionals="9" methods="11" coveredmethods="9" elements="113" coveredelements="86" complexity="0" loc="85" ncloc="85" packages="5" files="7" classes="7"/>
+    <package name="be">
+      <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="server.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\server.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="be.controllers">
+      <metrics statements="28" coveredstatements="22" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4"/>
+      <file name="SalesController.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\controllers\SalesController.js">
+        <metrics statements="28" coveredstatements="22" conditionals="4" coveredconditionals="2" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="60" count="0" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="1" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="76" count="1" type="stmt"/>
+        <line num="79" count="1" type="stmt"/>
+        <line num="84" count="0" type="stmt"/>
+        <line num="89" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="be.middlewares">
+      <metrics statements="11" coveredstatements="2" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="errHandler.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\middlewares\errHandler.js">
+        <metrics statements="11" coveredstatements="2" conditionals="3" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="0" type="cond" truecount="0" falsecount="3"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="8" count="0" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="be.models">
+      <metrics statements="25" coveredstatements="24" conditionals="10" coveredconditionals="7" methods="5" coveredmethods="5"/>
+      <file name="index.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\models\index.js">
+        <metrics statements="21" coveredstatements="20" conditionals="10" coveredconditionals="7" methods="3" coveredmethods="3"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="13" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="14" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="22" count="2" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="36" count="1" type="stmt"/>
+        <line num="40" count="1" type="stmt"/>
+        <line num="41" count="1" type="stmt"/>
+        <line num="43" count="1" type="stmt"/>
+      </file>
+      <file name="sale.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\models\sale.js">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="be.routes">
+      <metrics statements="14" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\routes\index.js">
+        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+      </file>
+      <file name="salesRoute.js" path="D:\Course\FSJS\file requirement job\PT Qtasnim\Coding Asigment\be\routes\salesRoute.js">
+        <metrics statements="8" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
