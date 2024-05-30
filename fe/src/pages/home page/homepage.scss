@@ -43,7 +43,28 @@
     .sidebar {
       width: 20%;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      margin-top: 36px;
+
+      div {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding: 5px;
+        cursor: pointer;
+        background-color: yellowgreen;
+        color: white;
+        font-weight: bold;
+        margin: 5px;
+        border-radius: 5px;
+        transition: 0.5s;
+        font-size: 18px;
+        gap: 10px;
+
+        &:hover {
+          background-color: green;
+        }
+      }
     }
 
     .data {
@@ -52,12 +73,14 @@
       flex-direction: column;
 
       h1 {
-        padding: 10px;
+        padding-left: 10px;
       }
 
       table {
         border-collapse: collapse;
-        margin: 10px;
+        margin-left: 10px;
+        margin-top: 5px;
+        margin-right: 10px;
 
         thead,
         tr,
@@ -67,10 +90,12 @@
             th {
               background-color: yellowgreen;
               color: white;
+              font-size: 18px;
+              height: 28px;
             }
 
-            .tindakan {
-              width: 50px;
+            .action {
+              width: 80px;
             }
           }
         }
@@ -79,21 +104,95 @@
         tr,
         td {
           border: 1px solid black;
+          height: 20px;
           tr {
             td {
               text-align: center;
             }
+
             .itemName {
               text-align: left;
               padding-left: 5px;
             }
 
-            .tindakan {
+            .action {
+              cursor: pointer;
               display: flex;
               justify-content: center;
-              align-items: center;
+              gap: 10px;
+              opacity: 0.5;
+            }
+
+            .placeNameInput {
+              text-align: left;
+              .nameInput {
+                max-width: 100px;
+              }
+            }
+
+            .stockInput {
+              max-width: 50px;
+              text-align: center;
+            }
+
+            .sellAmountInput {
+              max-width: 80px;
+              text-align: center;
+            }
+
+            .typeInput {
+              max-width: 100px;
+              text-align: center;
             }
           }
+        }
+      }
+    }
+
+    .addData {
+      width: 60%;
+      h1 {
+        padding-left: 10px;
+      }
+
+      form {
+        margin-top: 5px;
+        margin-left: 10px;
+        display: flex;
+        flex-direction: column;
+        width: 50%;
+        gap: 10px;
+
+        .dateInput {
+          width: 120px;
+        }
+
+        span {
+          margin-left: 10px;
+        }
+
+        input {
+          padding: 5px;
+          border-radius: 5px;
+          outline: none;
+        }
+
+        button {
+          align-self: flex-end;
+          width: 100px;
+          border-radius: 5px;
+          padding: 5px;
+          color: white;
+          background-color: yellowgreen;
+          cursor: pointer;
+          transition: 0.3s;
+          outline: none;
+        }
+
+        button:hover {
+          background-color: green;
+          scale: 1.1;
+          font-size: bold;
         }
       }
     }
