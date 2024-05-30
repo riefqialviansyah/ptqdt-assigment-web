@@ -1,4 +1,5 @@
 const { Sale } = require("../models");
+const { param } = require("../routes/salesRoute");
 
 class SalesController {
   static async getAll(req, res, next) {
@@ -9,6 +10,22 @@ class SalesController {
 
       // send response
       res.status(200).json({ data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async getOne(req, res, next) {
+    try {
+      const { id } = req.params;
+
+      const sale = await Sale.findByPk(id);
+
+      if (!sale) {
+        throw { name: "Not Found", message: "Sale data not found" };
+      }
+
+      res.status(200).json({ data: sale });
     } catch (error) {
       next(error);
     }
