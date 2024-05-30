@@ -1,10 +1,13 @@
-import { HiOutlineTrash } from "react-icons/hi";
-import "./homepage.scss";
+import { HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
 import { useEffect, useState } from "react";
+
+import "./homepage.scss";
+import { useNavigate } from "react-router-dom";
 const baseURl = import.meta.env.VITE_BASE_SERVER_URL;
 
 export default function HomePage() {
   const [sales, setSales] = useState([]);
+  const navigate = useNavigate();
 
   async function getSales() {
     try {
@@ -12,7 +15,26 @@ export default function HomePage() {
 
       const data = await response.json();
 
-      console.log(data.data);
+      setSales(data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function formatDate(date) {
+    let tmpDate = new Date(date).toLocaleString("id-ID", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    return tmpDate;
+  }
+
+  async function deleteSales(id) {
+    try {
+      await fetch(`${baseURl}/sales/delete/${id}`, { method: "DELETE" });
+      await getSales();
     } catch (error) {
       console.log(error);
     }
@@ -20,50 +42,53 @@ export default function HomePage() {
 
   useEffect(() => {
     getSales();
-  });
+  }, []);
 
   return (
     <div className="homepage">
-      <nav>
-        <div className="logo">Kage Code</div>
-        <div className="search">
-          <input type="text" />
-        </div>
-        <div className="option">Option</div>
-      </nav>
-      <main>
-        <div className="sidebar">Side Bar</div>
-        <div className="data">
-          <h1>Data Penjualan</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>Nama Barang</th>
-                <th>Stock</th>
-                <th>Jumlah Terjual</th>
-                <th>Tanggal Transaksi</th>
-                <th>Janis Barang</th>
-                <th className="tindakan">Opsi</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td className="itemName">Kopi</td>
-                <td>100</td>
-                <td>25</td>
-                <td className="transaction">Senin, 1 Mei 2021</td>
-                <td>Konsumsi</td>
-                <td className="tindakan">
-                  <HiOutlineTrash />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div className="about">About</div>
-      </main>
+      <h1>Data Penjualan</h1>
+      <table>
+        <thead>
+          <tr>
+            <th className="order-no">No</th>
+            <th className="item-name">Nama Barang</th>
+            <th className="item-stock">Stock</th>
+            <th className="item-sell-amount">Jumlah Terjual</th>
+            <th className="item-transaction-date">Tanggal Transaksi</th>
+            <th className="item-type">Jenis Barang</th>
+            <th className="action">Opsi</th>
+          </tr>
+        </thead>
+        <tbody>
+          {sales.length > 0 &&
+            sales.map((sale, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td className="data-name">{sale.name}</td>
+                  <td>{sale.stock}</td>
+                  <td>{sale.sellAmount}</td>
+                  <td>{formatDate(sale.transactionDate)}</td>
+                  <td>{sale.type}</td>
+                  <td>
+                    <div className="data-action">
+                      <HiOutlinePencil
+                        onClick={() => {
+                          navigate(`/edit-sale/${sale.id}`);
+                        }}
+                      />
+                      <HiOutlineTrash
+                        onClick={() => {
+                          deleteSales(sale.id);
+                        }}
+                      />
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
+        </tbody>
+      </table>
     </div>
   );
 }
