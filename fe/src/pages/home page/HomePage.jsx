@@ -12,10 +12,20 @@ export default function HomePage() {
 
       const data = await response.json();
 
-      console.log(data.data);
+      setSales(data.data);
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function formatDate(date) {
+    let tmpDate = new Date(date).toLocaleString("id-ID", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    return tmpDate;
   }
 
   useEffect(() => {
@@ -48,17 +58,24 @@ export default function HomePage() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td className="itemName">Kopi</td>
-                <td>100</td>
-                <td>25</td>
-                <td className="transaction">Senin, 1 Mei 2021</td>
-                <td>Konsumsi</td>
-                <td className="tindakan">
-                  <HiOutlineTrash />
-                </td>
-              </tr>
+              {sales.length > 0 &&
+                sales.map((sale, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td className="itemName">{sale.name}</td>
+                      <td>{sale.stock}</td>
+                      <td>{sale.sellAmount}</td>
+                      <td className="transaction">
+                        {formatDate(sale.transactionDate)}
+                      </td>
+                      <td>{sale.type}</td>
+                      <td className="tindakan">
+                        <HiOutlineTrash />
+                      </td>
+                    </tr>
+                  );
+                })}
             </tbody>
           </table>
         </div>
