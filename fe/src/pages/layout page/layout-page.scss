@@ -1,0 +1,21 @@
+.layout {
+  min-height: 100vh;
+
+  main {
+    width: 100%;
+    display: flex;
+    min-height: calc(100vh - 200px);
+
+    .sidebar {
+      width: 20%;
+    }
+
+    .content {
+      width: 60%;
+    }
+
+    .about {
+      width: 20%;
+    }
+  }
+}

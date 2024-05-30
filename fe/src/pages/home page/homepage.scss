@@ -1,206 +1,81 @@
 .homepage {
-  min-height: 100vh;
+  min-height: calc(100vh - 50px);
 
-  nav {
-    height: 50px;
-    width: 100%;
-    display: flex;
-    border-bottom: 1px solid black;
-
-    .logo {
-      width: 20%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .search {
-      width: 60%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 10px;
-
-      input {
-        width: 100%;
-        height: 25px;
-      }
-    }
-
-    .option {
-      width: 20%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  h1 {
+    padding-left: 10px;
   }
 
-  main {
-    width: 100%;
-    min-height: calc(100vh - 50px);
-    display: flex;
+  table {
+    border-collapse: collapse;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-right: 10px;
 
-    .sidebar {
-      width: 20%;
-      display: flex;
-      flex-direction: column;
-      margin-top: 36px;
-
-      div {
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        padding: 5px;
-        cursor: pointer;
-        background-color: yellowgreen;
-        color: white;
-        font-weight: bold;
-        margin: 5px;
-        border-radius: 5px;
-        transition: 0.5s;
-        font-size: 18px;
-        gap: 10px;
-
-        &:hover {
-          background-color: green;
-        }
-      }
-    }
-
-    .data {
-      width: 60%;
-      display: flex;
-      flex-direction: column;
-
-      h1 {
-        padding-left: 10px;
-      }
-
-      table {
-        border-collapse: collapse;
-        margin-left: 10px;
-        margin-top: 5px;
-        margin-right: 10px;
-
-        thead,
-        tr,
+    thead,
+    tr,
+    th {
+      border: 1px solid black;
+      tr {
         th {
-          border: 1px solid black;
-          tr {
-            th {
-              background-color: yellowgreen;
-              color: white;
-              font-size: 18px;
-              height: 28px;
-            }
-
-            .action {
-              width: 80px;
-            }
-          }
-        }
-
-        tbody,
-        tr,
-        td {
-          border: 1px solid black;
-          height: 20px;
-          tr {
-            td {
-              text-align: center;
-            }
-
-            .itemName {
-              text-align: left;
-              padding-left: 5px;
-            }
-
-            .action {
-              cursor: pointer;
-              display: flex;
-              justify-content: center;
-              gap: 10px;
-              opacity: 0.5;
-            }
-
-            .placeNameInput {
-              text-align: left;
-              .nameInput {
-                max-width: 100px;
-              }
-            }
-
-            .stockInput {
-              max-width: 50px;
-              text-align: center;
-            }
-
-            .sellAmountInput {
-              max-width: 80px;
-              text-align: center;
-            }
-
-            .typeInput {
-              max-width: 100px;
-              text-align: center;
-            }
-          }
-        }
-      }
-    }
-
-    .addData {
-      width: 60%;
-      h1 {
-        padding-left: 10px;
-      }
-
-      form {
-        margin-top: 5px;
-        margin-left: 10px;
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-        gap: 10px;
-
-        .dateInput {
-          width: 120px;
-        }
-
-        span {
-          margin-left: 10px;
-        }
-
-        input {
-          padding: 5px;
-          border-radius: 5px;
-          outline: none;
-        }
-
-        button {
-          align-self: flex-end;
-          width: 100px;
-          border-radius: 5px;
-          padding: 5px;
-          color: white;
           background-color: yellowgreen;
-          cursor: pointer;
-          transition: 0.3s;
-          outline: none;
+          color: white;
+          font-size: 18px;
+          height: 28px;
         }
+      }
 
-        button:hover {
-          background-color: green;
-          scale: 1.1;
-          font-size: bold;
-        }
+      .order-no {
+        width: 5%;
+      }
+
+      .item-name {
+        width: 35%;
+      }
+
+      .item-stock {
+        width: 10%;
+      }
+
+      .item-sell-amount {
+        width: 10%;
+      }
+
+      .item-transaction-date {
+        width: 15%;
+      }
+
+      .item-type {
+        width: 15%;
+      }
+
+      .action {
+        width: 8%;
       }
     }
 
-    .about {
-      width: 20%;
-      display: flex;
-      justify-content: center;
+    tbody {
+      tr {
+        height: 25px;
+        font-size: 16px;
+
+        td {
+          text-align: center;
+          border: 1px solid black;
+
+          .data-action {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            font-size: 18px;
+            opacity: 0.5;
+          }
+        }
+
+        .data-name {
+          text-align: left;
+          padding-left: 10px;
+        }
+      }
     }
   }
 }
