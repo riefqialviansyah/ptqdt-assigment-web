@@ -11,10 +11,14 @@ const sellDataSlice = createSlice({
   },
 });
 
-export function fetchSellData(searchKey) {
-  console.log(searchKey);
+export function fetchSellData(search) {
+  let url = `${baseUrl}/sales/getAll`;
+  console.log(search, "<<");
+  if (search) {
+    url += `?search=${search.key}&order=${search.order}&sort=${search.sort}`;
+  }
   return async (dispatch) => {
-    const response = await fetch(`${baseUrl}/sales/getAll?search=Makanan`);
+    const response = await fetch(url);
     const data = await response.json();
     dispatch(setSellData(data.data));
   };

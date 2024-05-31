@@ -5,8 +5,8 @@ import "./navbar.scss";
 
 export default function Navbar() {
   const [searchKey, setSearchKey] = useState({
-    searchKey: "",
-    orderBy: "transaksi",
+    key: "",
+    order: "transaksi",
     sort: "desc",
   });
   const dispatch = useDispatch();
@@ -26,23 +26,23 @@ export default function Navbar() {
       <div className="search">
         <input
           type="text"
-          name="searchKey"
+          name="key"
           placeholder="Cari history penjualan, berdasarkan nama, stock, jumlah terjual dan jenis barang..."
           onChange={searchHandler}
         />
-        <select name="orderBy" className="selection" onChange={searchHandler}>
+        <select name="order" className="selection" onChange={searchHandler}>
           <option disabled selected>
             Urut Berdasar
           </option>
           <option value="name">Nama</option>
-          <option value="name">Transaksi</option>
+          <option value="transaksi">Transaksi</option>
         </select>
         <select name="sort" className="selection" onChange={searchHandler}>
           <option selected disabled>
             Pilih Urutan
           </option>
           <option value="asc">ASC</option>
-          <option value="dsc">DSC</option>
+          <option value="desc">DSC</option>
         </select>
         <button onClick={refetchData}>Search</button>
       </div>
