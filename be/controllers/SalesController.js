@@ -30,7 +30,7 @@ class SalesController {
       } else {
         option.order[0][1] = "ASC";
       }
-      console.log(option, "<<<");
+
       const data = await Sale.findAll(option);
       // send response
       res.status(200).json({ data });
