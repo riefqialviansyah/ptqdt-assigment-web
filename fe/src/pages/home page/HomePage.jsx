@@ -41,8 +41,9 @@ export default function HomePage() {
     try {
       await fetch(`${baseURl}/sales/delete/${id}`, { method: "DELETE" });
       dispatch(fetchDataBarang());
-      dispatch(fetchSellData());
+      dispatch(fetchStatistikSellAmount());
       dispatch(fetchDataStatistic());
+      dispatch(fetchSellData());
     } catch (error) {
       console.log(error);
     }
