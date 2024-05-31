@@ -1,6 +1,6 @@
 import { useState } from "react";
-import "./addsalepage.scss";
 import { useNavigate } from "react-router-dom";
+import "./addsalepage.scss";
 
 const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 

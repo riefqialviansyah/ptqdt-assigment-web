@@ -1,25 +1,16 @@
 import { HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSellData } from "../../store/sellDataSlicer";
 
 import "./homepage.scss";
 import { useNavigate } from "react-router-dom";
 const baseURl = import.meta.env.VITE_BASE_SERVER_URL;
 
 export default function HomePage() {
-  const [sales, setSales] = useState([]);
   const navigate = useNavigate();
-
-  async function getSales() {
-    try {
-      const response = await fetch(`${baseURl}/sales/getAll`);
-
-      const data = await response.json();
-
-      setSales(data.data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const dispatch = useDispatch();
+  const sellData = useSelector((state) => state.sellData.data);
 
   function formatDate(date) {
     let tmpDate = new Date(date).toLocaleString("id-ID", {
@@ -34,14 +25,14 @@ export default function HomePage() {
   async function deleteSales(id) {
     try {
       await fetch(`${baseURl}/sales/delete/${id}`, { method: "DELETE" });
-      await getSales();
+      dispatch(fetchSellData());
     } catch (error) {
       console.log(error);
     }
   }
 
   useEffect(() => {
-    getSales();
+    dispatch(fetchSellData());
   }, []);
 
   return (
@@ -51,6 +42,7 @@ export default function HomePage() {
         <thead>
           <tr>
             <th className="order-no">No</th>
+            <th className="order-no">Id</th>
             <th className="item-name">Nama Barang</th>
             <th className="item-stock">Stock</th>
             <th className="item-sell-amount">Jumlah Terjual</th>
@@ -60,11 +52,12 @@ export default function HomePage() {
           </tr>
         </thead>
         <tbody>
-          {sales.length > 0 &&
-            sales.map((sale, index) => {
+          {sellData.length > 0 &&
+            sellData.map((sale, index) => {
               return (
                 <tr key={index}>
                   <td>{index + 1}</td>
+                  <td className="data-id">{sale.id}</td>
                   <td className="data-name">{sale.name}</td>
                   <td>{sale.stock}</td>
                   <td>{sale.sellAmount}</td>
