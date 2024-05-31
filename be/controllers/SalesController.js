@@ -1,13 +1,37 @@
+const { Op } = require("sequelize");
 const { Sale } = require("../models");
 const { param } = require("../routes/salesRoute");
 
 class SalesController {
   static async getAll(req, res, next) {
     try {
-      const data = await Sale.findAll({
-        order: [["transactionDate", "DESC"]],
-      });
+      const { search, order, sort } = req.query;
 
+      const option = {
+        order: [["transactionDate", "DESC"]],
+      };
+
+      if (search) {
+        option.where = {
+          name: {
+            [Op.iLike]: `%${search}%`,
+          },
+        };
+      }
+
+      if (order == "transaksi") {
+        option.order[0][0] = "transactionDate";
+      } else if (order == "name") {
+        option.order[0][0] = "name";
+      }
+
+      if (sort == "desc") {
+        option.order[0][1] = "DESC";
+      } else {
+        option.order[0][1] = "ASC";
+      }
+      console.log(option, "<<<");
+      const data = await Sale.findAll(option);
       // send response
       res.status(200).json({ data });
     } catch (error) {
