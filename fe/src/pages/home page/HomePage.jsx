@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSellData } from "../../store/sellDataSlicer";
 import { fetchDataStatistic } from "../../store/sellDataSlicer";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 import "./homepage.scss";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +13,15 @@ export default function HomePage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const sellData = useSelector((state) => state.sellData.data);
+  const location = useLocation();
+
+  const [searchParams] = useSearchParams();
+  const search = searchParams.get("search");
+  const order = searchParams.get("order");
+  const sort = searchParams.get("sort");
+
+  const from = searchParams.get("filter[from]");
+  const to = searchParams.get("filter[to]");
 
   function formatDate(date) {
     let tmpDate = new Date(date).toLocaleString("id-ID", {
@@ -34,8 +44,11 @@ export default function HomePage() {
   }
 
   useEffect(() => {
-    dispatch(fetchSellData());
-    dispatch(fetchDataStatistic());
+    if (location.search.includes("filter")) {
+      dispatch(fetchDataStatistic({ from, to }));
+    } else {
+      dispatch(fetchSellData({ key: search, order, sort }));
+    }
   }, []);
 
   return (

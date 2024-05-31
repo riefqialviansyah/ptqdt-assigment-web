@@ -45,6 +45,52 @@
           }
         }
       }
+      .filter-date {
+        background-color: rgb(241, 205, 142);
+        margin: 5px;
+        padding: 5px;
+        border-radius: 10px;
+
+        h3 {
+          text-align: center;
+          margin-bottom: 10px;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin-bottom: 5px;
+
+          span {
+            text-align: center;
+          }
+
+          input {
+            text-align: center;
+            border-radius: 5px;
+            width: 80%;
+            padding: 2px;
+          }
+        }
+      }
+      button {
+        width: 80%;
+        border-radius: 5px;
+        padding: 4px;
+        background-color: green;
+        color: white;
+        margin-top: 10px;
+      }
+
+      select {
+        width: 80%;
+        text-align: center;
+
+        padding: 2px;
+        border-radius: 5px;
+      }
     }
 
     .content {

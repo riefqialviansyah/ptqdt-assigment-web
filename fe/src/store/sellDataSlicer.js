@@ -3,7 +3,7 @@ const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 
 const sellDataSlice = createSlice({
   name: "sellData",
-  initialState: { data: [], statistik: [] },
+  initialState: { data: [], statistik: [], statusData: "search" },
   reducers: {
     setSellData(state, action) {
       state.data = action.payload;
@@ -11,13 +11,16 @@ const sellDataSlice = createSlice({
     setStatistik(state, action) {
       state.statistik = action.payload;
     },
+    setStatusData(state, action) {
+      state.statusData = action.payload;
+    },
   },
 });
 
 export function fetchSellData(search) {
   let url = `${baseUrl}/sales/getAll`;
   if (search) {
-    url += `?search=${search.key}&order=${search.order}&sort=${search.sort}`;
+    url += `?search=${search?.key}&order=${search?.order}&sort=${search?.sort}`;
   }
   return async (dispatch) => {
     const response = await fetch(url);
@@ -26,13 +29,20 @@ export function fetchSellData(search) {
   };
 }
 
-export function fetchDataStatistic() {
+export function fetchDataStatistic(filter) {
+  let url = `${baseUrl}/sales/lowAndHighData`;
+
+  if (filter.from) {
+    url += `?filter[from]=${filter.from}&filter[to]=${filter.to}&filter[type]=${filter.type}`;
+  }
+
   return async (dispatch) => {
-    const response = await fetch(`${baseUrl}/sales/lowAndHighData`);
+    const response = await fetch(url);
     const data = await response.json();
-    dispatch(setStatistik(data.data));
+    dispatch(setSellData(data.data));
   };
 }
 
-export const { setSellData, setStatistik } = sellDataSlice.actions;
+export const { setSellData, setStatistik, setStatusData } =
+  sellDataSlice.actions;
 export const sellDataReducer = sellDataSlice.reducer;

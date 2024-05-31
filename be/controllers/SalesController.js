@@ -6,12 +6,12 @@ class SalesController {
   static async getAll(req, res, next) {
     try {
       const { search, order, sort } = req.query;
-
+      console.log(req.query, "<<<<<<<<<<<<<<<");
       const option = {
         order: [["createdAt", "DESC"]],
       };
 
-      if (search) {
+      if (search && search != "null") {
         option.where = {
           [Op.or]: [
             {
@@ -28,18 +28,17 @@ class SalesController {
         };
       }
 
-      if (order == "transaksi") {
-        option.order[0][0] = "transactionDate";
-      } else if (order == "name") {
-        option.order[0][0] = "name";
+      if (
+        order &&
+        order != "null" &&
+        (order == "transactionDate" || order == "name" || order == "sellAmount")
+      ) {
+        option.order[0][0] = order;
       }
-
-      if (sort == "asc") {
-        option.order[0][1] = "ASC";
-      } else {
-        option.order[0][1] = "DESC";
+      if (sort && sort != "null" && (sort == "ASC" || sort == "DESC")) {
+        option.order[0][1] = sort;
       }
-
+      console.log(option, "<<<<<<<<< option");
       const data = await Sale.findAll(option);
       // send response
       res.status(200).json({ data });
@@ -51,7 +50,6 @@ class SalesController {
   static async getOne(req, res, next) {
     try {
       const { id } = req.params;
-
       const sale = await Sale.findByPk(id);
 
       if (!sale) {
@@ -137,27 +135,44 @@ class SalesController {
 
   static async lowestAndHighest(req, res, next) {
     try {
-      const data = await Sale.findAll({
-        where: {
-          [Op.or]: [
-            {
-              sellAmount: {
-                [Op.eq]: sequelize.literal(
-                  '(SELECT MAX("sellAmount") FROM "Sales")'
-                ),
-              },
+      const { filter } = req.query;
+      console.log(req.query, "<<<");
+
+      let option = {};
+
+      if (filter.type == "max") {
+        option = {
+          where: {
+            sellAmount: {
+              [Op.eq]: sequelize.literal(
+                `(SELECT MAX("sellAmount") FROM "Sales" WHERE "transactionDate" <= '${filter.to}' and "transactionDate" >= '${filter.from}')`
+              ),
             },
-            {
-              sellAmount: {
-                [Op.eq]: sequelize.literal(
-                  '(SELECT MIN("sellAmount") FROM "Sales")'
-                ),
-              },
+            transactionDate: {
+              [Op.gte]: filter.from,
+              [Op.lte]: filter.to,
             },
-          ],
-        },
-        order: [["sellAmount", "DESC"]],
-      });
+          },
+          order: [["transactionDate", "DESC"]],
+        };
+      } else {
+        option = {
+          where: {
+            sellAmount: {
+              [Op.eq]: sequelize.literal(
+                `(SELECT MIN("sellAmount") FROM "Sales" WHERE "transactionDate" <= '${filter.to}' and "transactionDate" >= '${filter.from}')`
+              ),
+            },
+            transactionDate: {
+              [Op.gte]: filter.from,
+              [Op.lte]: filter.to,
+            },
+          },
+          order: [["transactionDate", "DESC"]],
+        };
+      }
+
+      const data = await Sale.findAll(option);
 
       res.status(200).json({ data });
     } catch (error) {
@@ -167,3 +182,27 @@ class SalesController {
 }
 
 module.exports = SalesController;
+
+/*
+const data = await Sale.findAll({
+        where: {
+          [Op.or]: [
+            {
+              sellAmount: {
+                [Op.eq]: sequelize.literal(
+                  `(SELECT MAX("sellAmount") FROM "Sales" ${literalMax})`
+                ),
+              },
+            },
+            {
+              sellAmount: {
+                [Op.eq]: sequelize.literal(
+                  `(SELECT MIN("sellAmount") FROM "Sales" ${literalMin})`
+                ),
+              },
+            },
+          ],
+        },
+        order: [["sellAmount", "DESC"]],
+      });
+*/
