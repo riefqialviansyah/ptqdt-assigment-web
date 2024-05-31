@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const { Sale } = require("../models");
+const { Sale, sequelize } = require("../models");
 const { param } = require("../routes/salesRoute");
 
 class SalesController {
@@ -8,14 +8,23 @@ class SalesController {
       const { search, order, sort } = req.query;
 
       const option = {
-        order: [["transactionDate", "DESC"]],
+        order: [["createdAt", "DESC"]],
       };
 
       if (search) {
         option.where = {
-          name: {
-            [Op.iLike]: `%${search}%`,
-          },
+          [Op.or]: [
+            {
+              name: {
+                [Op.iLike]: `%${search}%`,
+              },
+            },
+            {
+              type: {
+                [Op.iLike]: `%${search}%`,
+              },
+            },
+          ],
         };
       }
 
@@ -25,10 +34,10 @@ class SalesController {
         option.order[0][0] = "name";
       }
 
-      if (sort == "desc") {
-        option.order[0][1] = "DESC";
-      } else {
+      if (sort == "asc") {
         option.order[0][1] = "ASC";
+      } else {
+        option.order[0][1] = "DESC";
       }
 
       const data = await Sale.findAll(option);
@@ -121,6 +130,36 @@ class SalesController {
         message: "Success delete sale data",
         deleteData: saleData,
       });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async lowestAndHighest(req, res, next) {
+    try {
+      const data = await Sale.findAll({
+        where: {
+          [Op.or]: [
+            {
+              sellAmount: {
+                [Op.eq]: sequelize.literal(
+                  '(SELECT MAX("sellAmount") FROM "Sales")'
+                ),
+              },
+            },
+            {
+              sellAmount: {
+                [Op.eq]: sequelize.literal(
+                  '(SELECT MIN("sellAmount") FROM "Sales")'
+                ),
+              },
+            },
+          ],
+        },
+        order: [["sellAmount", "DESC"]],
+      });
+
+      res.status(200).json({ data });
     } catch (error) {
       next(error);
     }

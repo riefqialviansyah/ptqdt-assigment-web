@@ -2,6 +2,7 @@ import { HiOutlineTrash, HiOutlinePencil } from "react-icons/hi";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSellData } from "../../store/sellDataSlicer";
+import { fetchDataStatistic } from "../../store/sellDataSlicer";
 
 import "./homepage.scss";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +27,7 @@ export default function HomePage() {
     try {
       await fetch(`${baseURl}/sales/delete/${id}`, { method: "DELETE" });
       dispatch(fetchSellData());
+      dispatch(fetchDataStatistic());
     } catch (error) {
       console.log(error);
     }
@@ -33,6 +35,7 @@ export default function HomePage() {
 
   useEffect(() => {
     dispatch(fetchSellData());
+    dispatch(fetchDataStatistic());
   }, []);
 
   return (

@@ -27,7 +27,7 @@ export default function Navbar() {
         <input
           type="text"
           name="key"
-          placeholder="Cari history penjualan, berdasarkan nama, stock, jumlah terjual dan jenis barang..."
+          placeholder="Cari history penjualan, berdasarkan nama, dan jenis barang..."
           onChange={searchHandler}
         />
         <select name="order" className="selection" onChange={searchHandler}>

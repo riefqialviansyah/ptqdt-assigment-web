@@ -3,17 +3,19 @@ const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 
 const sellDataSlice = createSlice({
   name: "sellData",
-  initialState: { data: [] },
+  initialState: { data: [], statistik: [] },
   reducers: {
     setSellData(state, action) {
       state.data = action.payload;
+    },
+    setStatistik(state, action) {
+      state.statistik = action.payload;
     },
   },
 });
 
 export function fetchSellData(search) {
   let url = `${baseUrl}/sales/getAll`;
-  console.log(search, "<<");
   if (search) {
     url += `?search=${search.key}&order=${search.order}&sort=${search.sort}`;
   }
@@ -24,5 +26,13 @@ export function fetchSellData(search) {
   };
 }
 
-export const { setSellData } = sellDataSlice.actions;
+export function fetchDataStatistic() {
+  return async (dispatch) => {
+    const response = await fetch(`${baseUrl}/sales/lowAndHighData`);
+    const data = await response.json();
+    dispatch(setStatistik(data.data));
+  };
+}
+
+export const { setSellData, setStatistik } = sellDataSlice.actions;
 export const sellDataReducer = sellDataSlice.reducer;
