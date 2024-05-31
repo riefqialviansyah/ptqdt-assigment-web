@@ -1,7 +1,7 @@
 # Assigment Web
 
-- Link deploy FE :
-- Link deploy BE :
+- Link deploy FE : https://testclient-eecb5.web.app
+- Link deploy BE : https://backend-ptqdt.riefqialviansyah.com
 
 # Instruksi
 
