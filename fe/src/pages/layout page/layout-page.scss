@@ -99,6 +99,26 @@
 
     .about {
       width: 20%;
+      text-align: center;
+      padding: 5px;
+
+      .data {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(241, 205, 142);
+        padding: 5px;
+        border-radius: 10px;
+
+        h3 {
+          margin-bottom: 10px;
+          opacity: 0.7;
+        }
+
+        div {
+          display: flex;
+          justify-content: space-between;
+        }
+      }
     }
   }
 }

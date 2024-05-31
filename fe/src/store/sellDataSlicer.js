@@ -3,16 +3,24 @@ const baseUrl = import.meta.env.VITE_BASE_SERVER_URL;
 
 const sellDataSlice = createSlice({
   name: "sellData",
-  initialState: { data: [], statistik: [], statusData: "search" },
+  initialState: {
+    data: [],
+    statusData: "search",
+    dataBarang: [],
+    statistikSellAmount: {},
+  },
   reducers: {
     setSellData(state, action) {
       state.data = action.payload;
     },
-    setStatistik(state, action) {
-      state.statistik = action.payload;
-    },
     setStatusData(state, action) {
       state.statusData = action.payload;
+    },
+    setDataBarang(state, action) {
+      state.dataBarang = action.payload;
+    },
+    setStatistikSellAmount(state, action) {
+      state.statistikSellAmount = action.payload;
     },
   },
 });
@@ -43,6 +51,29 @@ export function fetchDataStatistic(filter) {
   };
 }
 
-export const { setSellData, setStatistik, setStatusData } =
-  sellDataSlice.actions;
+export function fetchDataBarang() {
+  return async (dispatch) => {
+    const response = await fetch(`${baseUrl}/sales/goodsKind`);
+
+    const data = await response.json();
+
+    dispatch(setDataBarang(data.data));
+  };
+}
+
+export function fetchStatistikSellAmount() {
+  return async (dispatch) => {
+    const response = await fetch(`${baseUrl}/sales/statisticSellAmount`);
+    const data = await response.json();
+    dispatch(setStatistikSellAmount(data.data));
+  };
+}
+
+export const {
+  setSellData,
+  setStatistik,
+  setStatusData,
+  setDataBarang,
+  setStatistikSellAmount,
+} = sellDataSlice.actions;
 export const sellDataReducer = sellDataSlice.reducer;

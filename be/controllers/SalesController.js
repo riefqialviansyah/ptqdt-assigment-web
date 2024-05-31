@@ -179,30 +179,43 @@ class SalesController {
       next(error);
     }
   }
+
+  static async getItemNameAndTotal(req, res, next) {
+    try {
+      const data = await Sale.findAll({
+        attributes: [
+          "name",
+          [sequelize.fn("sum", sequelize.col("sellAmount")), "total"],
+        ],
+        order: [["total", "DESC"]],
+        group: ["name"],
+        limit: 5,
+      });
+
+      res.status(200).json({ data: data });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async statisticSaleAmount(req, res, next) {
+    try {
+      const data = (
+        await Sale.findAll({
+          attributes: [
+            [sequelize.fn("max", sequelize.col("sellAmount")), "max"],
+            [sequelize.fn("min", sequelize.col("sellAmount")), "min"],
+            [sequelize.fn("avg", sequelize.col("sellAmount")), "avg"],
+            [sequelize.fn("sum", sequelize.col("sellAmount")), "total"],
+          ],
+        })
+      )[0];
+
+      res.status(200).json({ data });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = SalesController;
-
-/*
-const data = await Sale.findAll({
-        where: {
-          [Op.or]: [
-            {
-              sellAmount: {
-                [Op.eq]: sequelize.literal(
-                  `(SELECT MAX("sellAmount") FROM "Sales" ${literalMax})`
-                ),
-              },
-            },
-            {
-              sellAmount: {
-                [Op.eq]: sequelize.literal(
-                  `(SELECT MIN("sellAmount") FROM "Sales" ${literalMin})`
-                ),
-              },
-            },
-          ],
-        },
-        order: [["sellAmount", "DESC"]],
-      });
-*/

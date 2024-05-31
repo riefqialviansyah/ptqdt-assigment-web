@@ -3,14 +3,21 @@ import Navbar from "../../components/navbar/Navbar";
 import "./layout-page.scss";
 import Sidebar from "../../components/sidebar/Sideber";
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
-import { fetchDataStatistic, setStatusData } from "../../store/sellDataSlicer";
+import { useEffect, useState } from "react";
+import {
+  fetchDataStatistic,
+  setStatusData,
+  fetchDataBarang,
+} from "../../store/sellDataSlicer";
 import "react-toastify/dist/ReactToastify.css";
 import { errAlert } from "../../helpers/alert";
 import { ToastContainer } from "react-toastify";
 
 export default function LayoutPage() {
-  const statistik = useSelector((state) => state.sellData.statistik);
+  const statisticItem = useSelector((state) => state.sellData.dataBarang);
+  const statisticSellAmountData = useSelector(
+    (state) => state.sellData.statistikSellAmount
+  );
   const [filterDate, setFilterDate] = useState({
     from: "",
     to: "",
@@ -21,16 +28,6 @@ export default function LayoutPage() {
 
   function hanledFilterDate(e) {
     setFilterDate({ ...filterDate, [e.target.name]: e.target.value });
-  }
-
-  function formatDate(date) {
-    let tmpDate = new Date(date).toLocaleString("id-ID", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
-
-    return tmpDate;
   }
 
   function filterStatistic() {
@@ -53,6 +50,10 @@ export default function LayoutPage() {
     setFilterDate({ ...filterDate, from: "", to: "" });
   }
 
+  useEffect(() => {
+    dispatch(fetchDataBarang());
+  }, []);
+
   return (
     <div className="layout">
       <ToastContainer />
@@ -72,22 +73,19 @@ export default function LayoutPage() {
                 <table>
                   <tr>
                     <td className="key">Max</td>
-                    <td>: {statistik[0] && statistik[0].name}</td>
+                    <td>: {statisticSellAmountData.max}</td>
                   </tr>
                   <tr>
                     <td className="key">Min</td>
-                    <td>: {statistik[0] && statistik[0].stock}</td>
+                    <td>: {statisticSellAmountData.min}</td>
                   </tr>
                   <tr>
                     <td className="key">Avg</td>
-                    <td>: {statistik[0] && statistik[0].sellAmount}</td>
+                    <td>: {Math.round(statisticSellAmountData.avg)}</td>
                   </tr>
                   <tr>
                     <td className="key">Total</td>
-                    <td>
-                      :{" "}
-                      {statistik[0] && formatDate(statistik[0].transactionDate)}
-                    </td>
+                    <td>: {statisticSellAmountData.total}</td>
                   </tr>
                 </table>
               </div>
@@ -132,7 +130,22 @@ export default function LayoutPage() {
         <div className="content">
           <Outlet />
         </div>
-        <div className="about">About</div>
+        <div className="about">
+          <div className="data">
+            <h3>Top 5 Penjualan Barang</h3>
+            {statisticItem.length > 0 &&
+              statisticItem.map((item, idx) => {
+                return (
+                  <div key={idx}>
+                    <span>
+                      {idx + 1}. {item.name}
+                    </span>
+                    <span>{item.total}</span>
+                  </div>
+                );
+              })}
+          </div>
+        </div>
       </main>
     </div>
   );
